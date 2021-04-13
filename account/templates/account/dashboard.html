@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Личный кабинет{% endblock %}
+{% block content %}
+   <section class="section-login">
+        <div class="login container">
+            <h2 class="title-dashboard">Личный кабинет</h2>
+            <div class="item-dashboard">
+                  <a class="link-nav link-dashboard" href="{% url 'logout' %}">
+                  <span class="text text-dashboard">Выйти</span>
+                  <span class="line -right"></span>
+                  <span class="line -top"></span>
+                  <span class="line -left"></span>
+                  <span class="line -bottom"></span>
+                </a><br>
+                 <p class="text-dashboard">Статус аккаунта: </p>
+                  <a class="link-nav link-dashboard" href="{% url 'worker_add' %}">
+                  <span class="text text-dashboard">Стать ассистентом</span>
+                  <span class="line -right"></span>
+                  <span class="line -top"></span>
+                  <span class="line -left"></span>
+                  <span class="line -bottom"></span>
+                </a>
+            </div>
+       </div>
+    </section>
+{% endblock %}

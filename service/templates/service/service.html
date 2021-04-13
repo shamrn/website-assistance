@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}Услуги{% endblock %}
+{% block content %}
+    <section class="section-service">
+        <div class="container">
+            <h2 class="title-service">Услуги специалистов в г.<small><a href="#">изменить&raquo;</a</small></h2>
+            <ul class="item-service">
+                {% for item in category %}
+                <li class="link-service">
+                    <a href="#">
+                        {% thumbnail item.photo "400x200" crop="center" as im %}
+                            <img class='img-service' src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                        {% endthumbnail %}
+                        <h2 class="title-category-service">{{ item.name }}</h2>
+                    </a>
+                    {% for ite in item.subcategory.all %}
+                    {% if forloop.counter <= 4 %}
+                    <p class="title-subcategory-service"><a href="#">{{ ite.name }}</a></p>
+                    {% endif %}
+                    {% endfor %}
+                    <p class="title-subcategory-service"><a href="#">еще&raquo;</a></p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

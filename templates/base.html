@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="item-nav">
+                <a class="logo-nav" href="#">Assistance</a>
+                 <a class="link-nav" href="{% url 'service' %}">
+                  <span class="text">Услуги</span>
+                  <span class="line -right"></span>
+                  <span class="line -top"></span>
+                  <span class="line -left"></span>
+                  <span class="line -bottom"></span>
+                </a>
+                <a class="link-nav" href="#">
+                  <span class="text">Поиск</span>
+                  <span class="line -right"></span>
+                  <span class="line -top"></span>
+                  <span class="line -left"></span>
+                  <span class="line -bottom"></span>
+                </a>
+                    <a class="link-nav link-nav-dash" href="{% url 'dashboard' %}">
+                  <span class="text">Личный кабинет</span>
+                  <span class="line -right"></span>
+                  <span class="line -top"></span>
+                  <span class="line -left"></span>
+                  <span class="line -bottom"></span>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% block content %} {% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Вход {% endblock %}
+
+{% block content %}
+    <section class="section-login">
+        <div class="container login">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>
+                            {{ message|safe }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form action="{% url 'login' %}" method="post">
+                {% for item in form %}
+                <strong>{{ item.label }}</strong>
+                <p>{{ item }}</p>
+                {% endfor %}
+                {% csrf_token %}
+                <p><input type="submit" value="Войти"></p>
+            </form>
+            <p><a href="{% url 'password_reset' %}">Восстановление пароля</a><a class='link-login' href="{% url 'signup' %}">Регистрация</a></p>
+        </div>
+    </section>
+{% endblock %}
