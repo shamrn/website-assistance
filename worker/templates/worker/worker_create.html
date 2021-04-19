@@ -6,10 +6,12 @@
         <div class="login container">
             <form action="." method="post" id="workerForm"
                   data-cities-url="{% url 'ajax_load_cities' %}" data-subcategory-url="{% url 'ajax_load_subcategory' %}"
-                  novalidate>
-                    {% for item in form %}
-                    <strong>{% if item.errors %} {{ item.errors }} {% else %} {{ item.label }} {% endif %}</strong>
-                    <p>{{ item }}</p>
+                  novalidate enctype="multipart/form-data">
+                    {% for field in form %}
+                     <strong> {{ field.label }} </strong>
+                    {% if field.errors %}<br><br><strong>{{ field.errors }} {% endif %}</strong>
+                    <br><small>  {{ field.help_text }}</small>
+                    <p>{{ field }}</p>
                     {% endfor %}
                 {% csrf_token %}
             <p><input type="submit" value="Создать"></p>

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'service.apps.ServiceConfig',
     'sorl.thumbnail',
     'worker.apps.WorkerConfig',
+    'django_filters',
 
 ]
 
@@ -131,7 +132,7 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
-LOGOUT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'service'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

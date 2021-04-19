@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Удаление анкеты {% endblock %}
+{% block content %}
+    <section class="section-login">
+        <div class="login container">
+          <p><strong>Ты действительно хочешь удалить анкету? {{ worker.category }} - {{ worker.subcategory }}</strong></p>
+            <form action="" method="post">
+              {% csrf_token %}
+            <p><input type="submit" value="Удалить"/> <input type="button" value="Верунуться в личный кабинет" onClick="window.location='{% url 'dashboard' %}'"/></p>
+          </form>
+        </div>
+    </section>
+{% endblock %}

@@ -2,8 +2,8 @@
 {% block title %}Личный кабинет{% endblock %}
 {% block content %}
    <section class="section-login">
-        <div class="login container">
             <h2 class="title-dashboard">Личный кабинет</h2>
+        <div class="login container dashboard">
             <div class="item-dashboard">
                   <a class="link-nav link-dashboard" href="{% url 'logout' %}">
                   <span class="text text-dashboard">Выйти</span>
@@ -12,14 +12,24 @@
                   <span class="line -left"></span>
                   <span class="line -bottom"></span>
                 </a><br>
-                 <p class="text-dashboard">Статус аккаунта: </p>
+                 <p class="text-dashboard">Статус аккаунта: <small>{{ profile.get_status_display }}</small></p>
                   <a class="link-nav link-dashboard" href="{% url 'worker_add' %}">
-                  <span class="text text-dashboard">Стать ассистентом</span>
+                  <span class="text text-dashboard">
+                  {% if profile.status == 'user' %} Стать ассистентом {% else %} Добавить анкету {% endif %}
+                  </span>
                   <span class="line -right"></span>
                   <span class="line -top"></span>
                   <span class="line -left"></span>
                   <span class="line -bottom"></span>
                 </a>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+            </div>
+            <div class="info-dashboard">
+                {% if worker %}
+                {% for item in worker %}
+                <p class="text-dashboard"><a class="anim-orange" href="{% url 'worker_change' item.id %}">Анкета: {{ item.category }}-{{ item.subcategory }}&raquo;</a></p>
+                {% endfor %}
+                {% endif %}
             </div>
        </div>
     </section>

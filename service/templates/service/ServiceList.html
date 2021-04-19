@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}Услуги{% endblock %}
+{% block content %}
+    <section class="section-service">
+        <div class="container">
+            <h2 class="title-service">Услуги специалистов в городе {{ city }}
+                <small>
+                       <select class="select-subcategory" onchange="window.location.href = this.options[this.selectedIndex].value">
+                        <option>изменить &raquo;</option>
+                        {% for item in city_query %}<option value="{% url 'city' item.id %}">{{ item.name }}</option>{% endfor %}
+                    </select>
+                </small>
+            </h2>
+            <ul class="item-service">
+                {% for item in category %}
+                <li class="link-service">
+                    <a href="{% url 'service_detail' item.slug %}">
+                        {% thumbnail item.photo "400x200" crop="center" as im %}
+                            <img class='img-service' src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                        {% endthumbnail %}
+                        <h2 class="title-category-service">{{ item.name }}</h2>
+                    </a>
+                    {% for ite in item.subcategory.all %}
+                    {% if forloop.counter <= 4 %}
+                    <p class="title-subcategory-service"><a href="{% url 'worker_list' ite.slug %}">{{ ite.name }}</a></p>
+                    {% endif %}
+                    {% endfor %}
+                    <p class="title-subcategory-service"><a href="{% url 'service_detail' item.slug %}">еще&raquo;</a></p>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="service-search">
+                {% include 'service/search.html' %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

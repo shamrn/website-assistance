@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block title %}Услуги {{ category.name }}{% endblock %}
+{% block content %}
+ <section class="section-service">
+        <div class="container">
+            <h2 class="title-service">Услуги специалистов категории: <br>{{ category.name }}
+                <small>
+                    <select class="select-subcategory" onchange="window.location.href = this.options[this.selectedIndex].value">
+                        <option>изменить &raquo;</option>
+                        {% for item in category_ %}<option value="{% url 'service_detail' item.slug %}">{{ item.name }}</option>{% endfor %}
+                    </select>
+                </small>
+            </h2>
+            <ul class="item-subcategory">
+                {% for item in category.subcategory.all %}
+                <li class="link-subcategory"><a class="anim-orange" href="{% url 'worker_list' item.slug %}">{{ item.name }} &raquo;</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

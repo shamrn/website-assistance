@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Анкета специалиста {% endblock %}
+{% load thumbnail %}
+{% block content %}
+    <section class="section-login">
+        <div class="worker container">
+            {% thumbnail worker.photo "450x450" crop="center" as im %}
+                <img class="img-worker" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            {% endthumbnail %}
+            <div class="worker-info">
+                <h2>{{ worker.name }}</h2>
+                <p>{{ worker.country }} {{ worker.city }}</p>
+                <p>{{ worker.category }} - {{ worker.subcategory }}</p>
+                <p>Возраст: {{ worker.birthdate }}</p>
+                <p>Стаж: с {{ worker.experience }} года</p>
+                 {% if worker.caption_price == 'по договорённости' %}
+                <p>Цена: {{ worker.caption_price }}</p>
+                {% else %}
+                <p>Цена: {{ worker.price }} {{ worker.currency }}/{{ worker.caption_price }} </p>
+                {% endif %}
+                <p>Дополнительная информация:</p>
+                <p>{{ worker.body }}</p>
+                <input type="button" value="Узнать номер" onClick="window.location='{% url 'take_worker' worker.subcategory.slug worker.id %}'"/>
+            </div>
+        </div>
+    </section>
+{% endblock %}

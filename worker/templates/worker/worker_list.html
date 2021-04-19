@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Специалисты {% endblock %}
+{% load thumbnail %}
+{% block content %}
+    <section class="section-login">
+        <div class="worker container">
+            <div class="filter-worker">
+               {% include "./filter_worker.html" %}
+            </div>
+            <div class="list-worker">
+            {% for item in worker %}
+                <a class="link-worker" href="{{ item.get_absolute_url }}">
+                    {% thumbnail item.photo "230x230" crop="center" as im %}
+                    <img class="img-worker" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
+                    <div class="detail-worker">
+                        <h3>{{ item.name }}</h3>
+                      <p>{{ item.country }}  {{ item.city }}</p>
+                        <p>Стаж с {{ item.experience}} года</p>
+                        <h4>
+                            {{ item.subcategory }}
+                            {% if item.caption_price == 'по договорённости' %}
+                            <small class="price-text">Цена: {{ item.caption_price }}</small>
+                            {% else %}
+                            <small class="price-text">{{ item.price }}{{ item.currency }}/{{ item.caption_price }}</small>
+                            {% endif %}
+                        </h4>
+                        <p>{{ item.body|truncatechars:60 }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="pagination">
+    <div class="page">
+        {% if page_obj.has_previous %}
+            <a class='anim-orange' href="?page=1">&laquo; Начало</a>
+            <a class='anim-orange' href="?page={{ page_obj.previous_page_number }}">&laquo;Назад </a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a class='anim-orange' href="?page={{ page_obj.next_page_number }}">Вперед &raquo;</a>
+            <a class='anim-orange' href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+    </section>
+{% endblock %}
